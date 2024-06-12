@@ -1,27 +1,14 @@
---
 -- setting
---
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 vim.opt.fileformats = { "unix", "dos", "mac" }
 
-vim.opt.undofile = true
-vim.opt.number = true
 vim.opt.wrap = false
-
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 10
+vim.opt.number = true
+vim.opt.undofile = true
 
 vim.opt.cursorline = true
 
--- vim.opt.clipboard = 'unnamedplus'
--- termux
--- install termux-api app and package
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
 
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
@@ -36,18 +23,24 @@ vim.opt.listchars = {
     precedes = '❮',
 }
 
--- ctrl + s
-vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
+-- vim.opt.clipboard = 'unnamedplus'
+-- termux
+-- install termux-api app and package
+
+-- Set <space> as the leader key
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
 -- quick quit
 vim.keymap.set('n', '<leader>q', ':q<CR>')
 
+-- ctrl + s
+vim.keymap.set('n', '<C-s>', ':w<CR>')
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
 
 vim.keymap.set("n", "<C-Tab>", function()
   vim.cmd("tabnext")
 end, { desc = "Chuyển sang tab tiếp theo" })
-
 
 
 -- plugin manager
@@ -58,7 +51,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
         "clone",
         "--filter=blob:none",
         "https://github.com/folke/lazy.nvim.git",
-        "--branch=stable", -- latest stable release
+        "--branch=stable",
         lazypath,
     })
 end
@@ -73,7 +66,6 @@ require("lazy").setup({
         config = function ()
             require('tokyonight').setup({
             })
-
             vim.cmd('colorscheme tokyonight')
         end,
     },
@@ -103,8 +95,9 @@ require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
-
-        {
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    {
         'hrsh7th/nvim-cmp',
         dependencies = {
             'neovim/nvim-lspconfig',
@@ -114,7 +107,6 @@ require("lazy").setup({
             'hrsh7th/cmp-cmdline',
         },
         config = function()
-            -- Set up nvim-cmp.
             local cmp = require 'cmp'
 
             cmp.setup({
@@ -140,10 +132,8 @@ require("lazy").setup({
                     end, { "i", "s" }),
                 }),
                 window = {
-
                     completion = cmp.config.window.bordered(),
                     documentation = cmp.config.window.bordered(),
-
                 },
                 sources = cmp.config.sources({
                     { name = 'nvim_lsp' },
@@ -152,14 +142,12 @@ require("lazy").setup({
                     { name = 'buffer' },
                 })
             })
-
             cmp.setup.cmdline({ '/', '?' }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = 'buffer' }
                 }
             })
-
             cmp.setup.cmdline(':', {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = cmp.config.sources({
@@ -169,14 +157,8 @@ require("lazy").setup({
                 }),
                 matching = { disallow_symbol_nonprefix_matching = false }
             })
-
-
         end
     },
-
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-
     {
         'junegunn/vim-easy-align',
         config = function()
@@ -184,7 +166,6 @@ require("lazy").setup({
             vim.keymap.set("n", "ga", "<Plug>(EasyAlign)", { desc = "Start EasyAlign (motion/object)" })
         end
     },
-
     {
         'projekt0n/github-nvim-theme',
         -- lazy = false,
@@ -192,10 +173,8 @@ require("lazy").setup({
         -- config = function()
         --     require('github-theme').setup({
         --     })
-
         --     vim.cmd('colorscheme github_dark')
         -- end,
     }
-
 })
 
