@@ -1,3 +1,55 @@
+--
+-- setting
+--
+
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
+vim.opt.fileformats = { "unix", "dos", "mac" }
+
+vim.opt.undofile = true
+vim.opt.number = true
+vim.opt.wrap = false
+
+vim.opt.scrolloff = 10
+vim.opt.sidescrolloff = 10
+
+vim.opt.cursorline = true
+
+-- vim.opt.clipboard = 'unnamedplus'
+-- termux
+-- install termux-api app and package
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+
+vim.opt.list = true
+vim.opt.listchars = {
+    tab = '▸ ',
+    trail = '·',
+    nbsp = '␣',
+    extends = '❯',
+    precedes = '❮',
+}
+
+-- ctrl + s
+vim.keymap.set('n', '<C-s>', ':w<CR>')
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
+
+-- quick quit
+vim.keymap.set('n', '<leader>q', ':q<CR>')
+
+
+vim.keymap.set("n", "<C-Tab>", function()
+  vim.cmd("tabnext")
+end, { desc = "Chuyển sang tab tiếp theo" })
+
+
+
 -- plugin manager
 local lazypath= vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -146,54 +198,4 @@ require("lazy").setup({
     }
 
 })
-
---
--- setting
---
-
--- Set <space> as the leader key
--- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
-vim.opt.fileformats = { "unix", "dos", "mac" }
-
-vim.opt.undofile = true
-vim.opt.number = true
-vim.opt.wrap = false
-
-vim.opt.scrolloff = 10
-vim.opt.sidescrolloff = 10
-
-vim.opt.cursorline = true
-
--- vim.opt.clipboard = 'unnamedplus'
--- termux
--- install termux-api app and package
-
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-
-vim.opt.list = true
-vim.opt.listchars = {
-    tab = '▸ ',
-    trail = '·',
-    nbsp = '␣',
-    extends = '❯',
-    precedes = '❮',
-}
-
--- ctrl + s
-vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
-
--- quick quit
-vim.keymap.set('n', '<leader>q', ':q<CR>')
-
-
-vim.keymap.set("n", "<C-Tab>", function()
-  vim.cmd("tabnext")
-end, { desc = "Chuyển sang tab tiếp theo" })
 
