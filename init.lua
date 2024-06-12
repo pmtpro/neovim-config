@@ -13,6 +13,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+    "nvim-tree/nvim-web-devicons",
     {
         "folke/tokyonight.nvim",
         lazy = false,
@@ -24,7 +25,6 @@ require("lazy").setup({
             vim.cmd('colorscheme tokyonight')
         end,
     },
-
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function ()
@@ -34,16 +34,11 @@ require("lazy").setup({
     {
         "nvim-tree/nvim-tree.lua",
         config = function()
-            -- File Explore
             vim.keymap.set("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "nvimtree toggle window" })
             vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<CR>", { desc = "nvimtree focus window" })
-            require("nvim-tree").setup({
-                disable_netrw = false,
-                hijack_netrw = true
-            })
+            require("nvim-tree").setup({})
         end
     },
-    "nvim-tree/nvim-web-devicons",
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -57,13 +52,15 @@ require("lazy").setup({
         end,
     },
 
-    'neovim/nvim-lspconfig',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    {
+        {
         'hrsh7th/nvim-cmp',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-path',
+            'hrsh7th/cmp-cmdline',
+        },
         config = function()
             -- Set up nvim-cmp.
             local cmp = require 'cmp'
@@ -150,9 +147,9 @@ require("lazy").setup({
 
 })
 
-
-
+--
 -- setting
+--
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -190,8 +187,13 @@ vim.opt.listchars = {
 
 -- ctrl + s
 vim.keymap.set('n', '<C-s>', ':w<CR>')
-vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a')
+vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>')
 
 -- quick quit
 vim.keymap.set('n', '<leader>q', ':q<CR>')
+
+
+vim.keymap.set("n", "<C-Tab>", function()
+  vim.cmd("tabnext")
+end, { desc = "Chuyển sang tab tiếp theo" })
 
